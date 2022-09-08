@@ -1,1 +1,4 @@
-
+node_modules
+bluid
+package-lock.json
+.env
