@@ -1,4 +1,4 @@
- import { connection } from "./connection"
+ import { BaseDataBase} from "./connection"
  const printError = (error: any) => { console.log(error.sqlMessage || error.message) }
 
 
@@ -19,6 +19,7 @@
 //     .finally(closeConnection)
 
 //     const createTable1 = () => connection.raw(`
+
 //  CREATE TABLE Turma1(
 //          id INT PRIMARY KEY,
 //          nome VARCHAR(255) NOT NULL,

@@ -1,24 +1,25 @@
-import { AddressInfo } from "net";
-import dotenv from "dotenv";
-import knex, { Knex } from "knex";
+import knex, { Knex } from "knex"
+import dotenv from "dotenv"
+dotenv.config()
 
-dotenv.config();
+// classe molde , onde a funcao getConnection vai ser chamada pelas filhas
+export abstract class BaseDataBase{
 
-export class connection{
-    static destroy() {
-        throw new Error("Method not implemented.");
-    }
-    static raw(arg0: string) {
-        throw new Error("Method not implemented.");
-    }
-    private connection: Knex | null = null
+    private static connection:Knex | null = null
 
-    protected getConnection(){
-        if(!this.connection){
-            this.connection = knex({
-                client: "mysql",
+    protected getConnetion():Knex{
+        if(!BaseDataBase.connection){
+            BaseDataBase.connection = knex({
+                client:"mysql",
+                connection:{
+                    host:process.env.DB_HOST,
+                    user:process.env.DB_USER,
+                    password:process.env.DB_PASSWORD,
+                    database:process.env.DB_DATABASE 
+                }
             })
         }
-        return this.connection
+
+        return BaseDataBase.connection
     }
 }
